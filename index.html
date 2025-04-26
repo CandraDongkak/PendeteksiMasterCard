@@ -1,0 +1,40 @@
+<!doctype html>
+<html> 
+ <head> 
+  <title>Cek Kartu MasterCard</title> 
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, button { padding: 8px; font-size: 16px; margin-top: 10px; }
+  </style> 
+ </head> 
+ <body> 
+  <h2>Cek Kartu MasterCard</h2> <label for="cardNumber">Nomor Kartu:</label>
+  <br> 
+  <input type="text" id="cardNumber" maxlength="16" placeholder="Masukkan 16 digit kartu">
+  <br> <button onclick="cekMasterCard()">Cek</button> 
+  <p id="hasil"></p> 
+  <script>
+    function cekMasterCard() {
+      const nomor = document.getElementById('cardNumber').value;
+      const hasil = document.getElementById('hasil');
+
+      // Hapus spasi dan pastikan hanya angka
+      const cleanNomor = nomor.replace(/\s+/g, '');
+      const prefix = parseInt(cleanNomor.substring(0, 6));
+      const panjang = cleanNomor.length;
+
+      // Cek format MasterCard
+      if (panjang === 16 && (
+          (prefix >= 510000 && prefix <= 559999) || 
+          (prefix >= 222100 && prefix <= 272099)
+        )) {
+        hasil.innerText = "Ini adalah kartu MasterCard.";
+        hasil.style.color = "green";
+      } else {
+        hasil.innerText = "Bukan kartu MasterCard.";
+        hasil.style.color = "red";
+      }
+    }
+  </script> 
+ </body>
+</html>
